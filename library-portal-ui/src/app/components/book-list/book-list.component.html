@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="header">
+    <h2>📚 Book Library</h2>
+    <div class="search-bar">
+      <input [(ngModel)]="searchQuery" placeholder="Search by title or author..."
+             (keyup.enter)="onSearch()"/>
+      <button (click)="onSearch()">Search</button>
+      <button (click)="searchQuery=''; loadBooks()">Clear</button>
+    </div>
+    <button *ngIf="authService.isAdmin" (click)="openAddForm()" class="btn-add">
+      + Add Book
+    </button>
+  </div>
+
+  <div *ngIf="message" [class]="isError ? 'msg error' : 'msg success'">{{ message }}</div>
+
+  <!-- Add/Edit Form (Admin only) -->
+  <div *ngIf="showForm" class="form-card">
+    <h3>{{ editingBook ? 'Edit Book' : 'Add New Book' }}</h3>
+    <div class="form-row">
+      <input [(ngModel)]="bookForm.title" placeholder="Title"/>
+      <input [(ngModel)]="bookForm.author" placeholder="Author"/>
+    </div>
+    <div class="form-row">
+      <input [(ngModel)]="bookForm.category" placeholder="Category"/>
+      <input [(ngModel)]="bookForm.publishedYear" type="number" placeholder="Published Year"/>
+    </div>
+    <div class="form-actions">
+      <button (click)="onSaveBook()" class="btn-primary">Save</button>
+      <button (click)="showForm=false" class="btn-secondary">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Book Grid -->
+  <div class="book-grid">
+    <div *ngFor="let book of books" class="book-card">
+      <div class="book-status" [class]="book.availabilityStatus === 'Available' ? 'available' : 'borrowed'">
+        {{ book.availabilityStatus }}
+      </div>
+      <h3>{{ book.title }}</h3>
+      <p class="author">by {{ book.author }}</p>
+      <p class="category">{{ book.category }} • {{ book.publishedYear }}</p>
+      <div class="book-actions">
+        <button *ngIf="!authService.isAdmin && book.availabilityStatus === 'Available'"
+                (click)="onBorrow(book.bookId)" class="btn-borrow">
+          Borrow
+        </button>
+        <ng-container *ngIf="authService.isAdmin">
+          <button (click)="openEditForm(book)" class="btn-edit">Edit</button>
+          <button (click)="onDelete(book.bookId)" class="btn-delete">Delete</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="books.length === 0" class="empty">No books found.</p>
+</div>

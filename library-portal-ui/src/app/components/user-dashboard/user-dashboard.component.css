@@ -1,0 +1,20 @@
+.container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
+.welcome-card { background: linear-gradient(135deg, #3498db, #2c3e50); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+.welcome-card h2 { margin: 0 0 0.5rem; }
+.welcome-card p { margin: 0; opacity: 0.85; }
+.msg { padding: 0.8rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+.msg.success { background: #d4edda; color: #155724; }
+.msg.error { background: #f8d7da; color: #721c24; }
+h3 { color: #2c3e50; margin-bottom: 1rem; }
+.empty { text-align: center; padding: 3rem; color: #7f8c8d; }
+.empty a { color: #3498db; }
+.history-list { display: flex; flex-direction: column; gap: 1rem; }
+.history-card { background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.record-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.record-header h4 { margin: 0; color: #2c3e50; }
+.badge { padding: 0.25rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.badge.borrowed { background: #fff3cd; color: #856404; }
+.badge.returned { background: #d4edda; color: #155724; }
+.author { color: #7f8c8d; margin: 0 0 0.3rem; font-size: 0.9rem; }
+.dates { color: #95a5a6; font-size: 0.85rem; margin: 0 0 1rem; }
+.btn-return { background: #e74c3c; color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 6px; cursor: pointer; }

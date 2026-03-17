@@ -1,0 +1,23 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>📚 Library Portal</h2>
+    <h3>Create Account</h3>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" [(ngModel)]="name" placeholder="Enter your name"/>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" placeholder="Enter email"/>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" placeholder="Min 6 characters"/>
+    </div>
+    <button (click)="onRegister()" [disabled]="loading" class="btn-primary">
+      {{ loading ? 'Creating account...' : 'Register' }}
+    </button>
+    <p class="link">Already have an account? <a routerLink="/login">Login</a></p>
+  </div>
+</div>
