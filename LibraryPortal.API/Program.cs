@@ -1,4 +1,5 @@
 ﻿using LibraryPortal.API.Data;
+using LibraryPortal.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -64,6 +65,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+builder.Services.AddScoped<TokenService>();
 
 // ── 5. Controllers + Swagger ─────────────────────────────────
 builder.Services.AddControllers();
