@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="welcome-card">
+    <h2>👋 Welcome, {{ authService.currentUser?.name }}!</h2>
+    <p>Manage your borrowed books here.</p>
+  </div>
+
+  <div *ngIf="message" [class]="isError ? 'msg error' : 'msg success'">{{ message }}</div>
+
+  <h3>My Borrow History</h3>
+
+  <div *ngIf="borrowHistory.length === 0" class="empty">
+    You haven't borrowed any books yet. <a routerLink="/books">Browse books →</a>
+  </div>
+
+  <div class="history-list">
+    <div *ngFor="let record of borrowHistory" class="history-card">
+      <div class="record-header">
+        <h4>{{ record.book.title }}</h4>
+        <span [class]="record.status === 'Borrowed' ? 'badge borrowed' : 'badge returned'">
+          {{ record.status }}
+        </span>
+      </div>
+      <p class="author">by {{ record.book.author }} • {{ record.book.category }}</p>
+      <p class="dates">
+        Borrowed: {{ record.borrowDate | date:'mediumDate' }}
+        <span *ngIf="record.returnDate"> | Returned: {{ record.returnDate | date:'mediumDate' }}</span>
+      </p>
+      <button *ngIf="record.status === 'Borrowed'"
+              (click)="onReturn(record.borrowId)" class="btn-return">
+        Return Book
+      </button>
+    </div>
+  </div>
+</div>

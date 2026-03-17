@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>🛠️ Admin Dashboard</h2>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid" *ngIf="stats">
+    <div class="stat-card blue">
+      <div class="stat-number">{{ stats.totalBooks }}</div>
+      <div class="stat-label">Total Books</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-number">{{ stats.totalUsers }}</div>
+      <div class="stat-label">Total Users</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-number">{{ stats.borrowedBooks }}</div>
+      <div class="stat-label">Currently Borrowed</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-number">{{ stats.availableBooks }}</div>
+      <div class="stat-label">Available Books</div>
+    </div>
+  </div>
+
+  <!-- Borrow Records Table -->
+  <div class="table-section">
+    <h3>All Borrow Records</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Book</th>
+          <th>Borrow Date</th>
+          <th>Return Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of allBorrows">
+          <td>{{ record.user.name }}<br><small>{{ record.user.email }}</small></td>
+          <td>{{ record.book.title }}<br><small>{{ record.book.author }}</small></td>
+          <td>{{ record.borrowDate | date:'mediumDate' }}</td>
+          <td>{{ record.returnDate ? (record.returnDate | date:'mediumDate') : '—' }}</td>
+          <td>
+            <span [class]="record.status === 'Borrowed' ? 'badge borrowed' : 'badge returned'">
+              {{ record.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="allBorrows.length === 0" class="empty">No borrow records yet.</p>
+  </div>
+</div>

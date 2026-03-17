@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <div class="navbar-brand">📚 Library Portal</div>
+  <div class="navbar-menu">
+    <ng-container *ngIf="authService.isLoggedIn">
+      <a routerLink="/books">Books</a>
+      <a *ngIf="!authService.isAdmin" routerLink="/dashboard">My Dashboard</a>
+      <a *ngIf="authService.isAdmin" routerLink="/admin">Admin Dashboard</a>
+      <span class="user-name">{{ authService.currentUser?.name }}</span>
+      <button (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-container *ngIf="!authService.isLoggedIn">
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    </ng-container>
+  </div>
+</nav>
